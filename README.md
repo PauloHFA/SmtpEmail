@@ -167,8 +167,10 @@ Erro (500 Internal Server Error):
 
 json
 "Erro ao enviar email: [mensagem de erro específica]"
+
 📁 Estrutura do Projeto
 text
+
 src/
 └── main/
     ├── java/
