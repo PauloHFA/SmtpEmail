@@ -85,3 +85,108 @@ spring.mail.properties.mail.smtp.timeout=5000
 spring.mail.properties.mail.smtp.writetimeout=5000
 
 Substitua SEU_EMAIL@gmail.com pelo seu e-mail do Gmail e SUA_SENHA_DE_APP_GERADA pela senha de aplicativo gerada.
+
+🛠 Instalação e Execução
+Executando localmente
+
+Clone o repositório:
+
+git clone git@github.com:PauloHFA/ApiApex.git
+cd ApiApex
+
+
+Compile o projeto:
+
+mvn clean compile
+
+
+Execute a aplicação:
+
+mvn spring-boot:run
+
+
+A aplicação estará disponível em: http://localhost:8080
+
+📮 Uso da API
+Endpoint POST /emails/send
+
+Corpo da Requisição:
+
+{
+  "para": "destinatario@exemplo.com",
+  "assunto": "Assunto do E-mail",
+  "mensagem": "Conteúdo da mensagem em texto simples ou HTML"
+}
+
+
+Exemplo de requisição local com curl:
+
+curl -X POST http://localhost:8080/emails/send \
+-H "Content-Type: application/json" \
+-d '{
+  "para": "destinatario@gmail.com",
+  "assunto": "Teste API ApiApex",
+  "mensagem": "Olá, este é um teste de envio de e-mail pela ApiApex!"
+}'
+
+
+Se estiver usando ngrok, substitua a URL pelo link fornecido, por exemplo:
+
+curl -X POST https://1234-5678.ngrok-free.app/emails/send \
+-H "Content-Type: application/json" \
+-d '{
+  "para": "destinatario@gmail.com",
+  "assunto": "Teste API ApiApex",
+  "mensagem": "Olá, este é um teste de envio de e-mail pela ApiApex!"
+}'
+
+Respostas da API
+
+Sucesso (200 OK):
+
+"E-mail enviado com sucesso!"
+
+
+Erro (500 - Erro Interno do Servidor):
+
+"Erro ao enviar email: [mensagem de erro específico]"
+
+🌍 Expondo com Ngrok
+
+Instale o Ngrok
+
+Execute a aplicação Spring Boot
+
+Em outro terminal, execute:
+
+ngrok http 8080
+
+
+O Ngrok fornecerá uma URL pública, por exemplo:
+
+Forwarding    https://1234-5678.ngrok-free.app -> http://localhost:8080
+
+
+Agora você pode acessar sua API externamente:
+
+https://1234-5678.ngrok-free.app/emails/send
+
+📁 Estrutura do Projeto
+src/
+└── main/
+    ├── java/
+    │   └── com/
+    │       └── exemplo/
+    │           └── apiapex/
+    │               ├── ApiApexApplication.java
+    │               ├── controller/
+    │               │   └── EmailController.java
+    │               ├── model/
+    │               │   └── Email.java
+    │               ├── service/
+    │               │   └── EmailService.java
+    │               └── config/
+    │                   └── MailConfig.java
+    └── resources/
+        └── application.properties
+
