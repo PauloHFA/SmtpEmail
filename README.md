@@ -1,22 +1,24 @@
-📧 API de Envio de E-mails (ApiApex)
+# 📧 API de Envio de E-mails (ApiApex)
 
-Esta aplicação Spring Boot tem como objetivo enviar e-mails utilizando o serviço Gmail SMTP.
-Ela expõe um endpoint REST para envio de mensagens, podendo ser acessado localmente ou via ngrok.
+Esta aplicação Spring Boot tem como objetivo enviar e-mails utilizando o serviço **Gmail SMTP**.  
+Ela expõe um endpoint REST para envio de mensagens, podendo ser acessado localmente ou via **ngrok**.
 
-🚀 Tecnologias utilizadas
+---
 
-Java 17+
+## 🚀 Tecnologias utilizadas
 
-Spring Boot
+- Java 17+
+- Spring Boot
+- Spring Mail (`spring-boot-starter-mail`)
+- Ngrok
 
-Spring Mail (spring-boot-starter-mail)
+---
 
-Ngrok
+## 📦 Dependências necessárias
 
-📦 Dependências necessárias
+No arquivo **`pom.xml`**, certifique-se de adicionar:
 
-No arquivo pom.xml, certifique-se de adicionar:
-
+```xml
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-mail</artifactId>
@@ -26,6 +28,10 @@ No arquivo pom.xml, certifique-se de adicionar:
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
+
+⚙️ Configuração do application.properties
+
+Configure o arquivo src/main/resources/application.properties:
 
 ⚙️ Configuração do application.properties
 
