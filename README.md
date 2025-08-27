@@ -1,23 +1,22 @@
-# 📧 API de Envio de E-mails (ApiApex)
+📧 API de Envio de E-mails (ApiApex)
 
-Esta aplicação Spring Boot tem como objetivo enviar e-mails utilizando o serviço **Gmail SMTP**.  
-Ela expõe um endpoint REST para envio de mensagens, podendo ser acessado localmente ou via **ngrok**.
+Esta aplicação Spring Boot tem como objetivo enviar e-mails utilizando o serviço Gmail SMTP.
+Ela expõe um endpoint REST para envio de mensagens, podendo ser acessado localmente ou via ngrok.
 
----
+🚀 Tecnologias utilizadas
 
-## 🚀 Tecnologias utilizadas
-- Java 17+
-- Spring Boot
-- Spring Mail (`spring-boot-starter-mail`)
-- Ngrok
+Java 17+
 
----
+Spring Boot
 
-## 📦 Dependências necessárias
+Spring Mail (spring-boot-starter-mail)
 
-No arquivo **`pom.xml`**, certifique-se de adicionar:
+Ngrok
 
-```xml
+📦 Dependências necessárias
+
+No arquivo pom.xml, certifique-se de adicionar:
+
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-mail</artifactId>
@@ -44,6 +43,7 @@ spring.mail.password=APP_PASSWORD_GMAIL
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 
+
 🔑 Atenção:
 Não utilize a senha real da sua conta Google.
 É necessário gerar uma Senha de App no Painel de Segurança do Gmail
@@ -65,7 +65,7 @@ public ResponseEntity<String> sendEmail(@RequestBody Email email) {
 }
 
 Exemplo de requisição
-POST http://localhost:8080/emails/send -vai ser substituido pela url do ngrok caso esteja utilizando.
+POST http://localhost:8080/emails/send
 Content-Type: application/json
 
 {
@@ -75,14 +75,15 @@ Content-Type: application/json
 }
 
 
-Resposta esperada:
+Se estiver utilizando ngrok, substitua a URL pelo link gerado, por exemplo:
+https://1234-5678.ngrok-free.app/emails/send
 
+Resposta esperada
 "Email enviado com sucesso!"
 
 🌍 Expor a API com Ngrok
 
-Instale o ngrok:
-Download
+Instale o ngrok: Download
 
 Execute sua aplicação localmente:
 
