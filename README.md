@@ -1,7 +1,7 @@
-📧 ApiApex - API de Envio de E-mails
+#📧 ApiApex - API de Envio de E-mails
 ApiApex é uma aplicação Spring Boot que permite o envio de e-mails através do serviço Gmail SMTP. A aplicação expõe um endpoint REST que pode ser acessado localmente ou via ngrok para integração com sistemas externos.
 
-📋 Índice
+##📋 Índice
 Funcionalidades
 
 Tecnologias Utilizadas
@@ -18,7 +18,7 @@ Expondo com Ngrok
 
 Estrutura do Projeto
 
-✨ Funcionalidades
+##✨ Funcionalidades
 Envio de e-mails através do protocolo SMTP do Gmail
 
 API RESTful com endpoint único para envio de mensagens
@@ -40,7 +40,7 @@ Spring Web (spring-boot-starter-web)
 
 Ngrok (para exposição pública)
 
-📋 Pré-requisitos
+##📋 Pré-requisitos
 Antes de executar a aplicação, certifique-se de ter instalado:
 
 JDK 17 ou superior
@@ -51,7 +51,7 @@ Conta no Gmail
 
 Ngrok (opcional, para exposição pública)
 
-⚙️ Configuração
+##⚙️ Configuração
 1. Configuração do Gmail
 Por questões de segurança, não utilize sua senha real do Gmail. Em vez disso, gere uma Senha de App:
 
@@ -90,7 +90,7 @@ spring.mail.properties.mail.smtp.timeout=5000
 spring.mail.properties.mail.smtp.writetimeout=5000
 Substitua SEU_EMAIL@gmail.com pelo seu e-mail do Gmail e SUA_SENHA_DE_APP_GERADA pela senha de aplicativo que você gerou.
 
-🛠 Instalação e Execução
+##🛠 Instalação e Execução
 Executando localmente
 Clone o repositório:
 
@@ -124,7 +124,7 @@ text
 Forwarding    https://1234-5678.ngrok-free.app -> http://localhost:8080
 Use esta URL para acessar sua API externamente
 
-📮 Uso da API
+##📮 Uso da API
 Endpoint
 POST /emails/send
 
@@ -168,7 +168,8 @@ Erro (500 Internal Server Error):
 json
 "Erro ao enviar email: [mensagem de erro específica]"
 
-📁 Estrutura do Projeto
+##📁 Estrutura do Projeto
+
 text
 
 src/
