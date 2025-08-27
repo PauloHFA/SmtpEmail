@@ -1,123 +1,188 @@
-# 📧 API de Envio de E-mails (ApiApex)
+📧 ApiApex - API de Envio de E-mails
+ApiApex é uma aplicação Spring Boot que permite o envio de e-mails através do serviço Gmail SMTP. A aplicação expõe um endpoint REST que pode ser acessado localmente ou via ngrok para integração com sistemas externos.
 
-Esta aplicação Spring Boot tem como objetivo enviar e-mails utilizando o serviço **Gmail SMTP**.  
-Ela expõe um endpoint REST para envio de mensagens, podendo ser acessado localmente ou via **ngrok**.
+📋 Índice
+Funcionalidades
 
----
+Tecnologias Utilizadas
 
-## 🚀 Tecnologias utilizadas
+Pré-requisitos
 
-- Java 17+
-- Spring Boot
-- Spring Mail (`spring-boot-starter-mail`)
-- Ngrok
+Configuração
 
----
+Instalação e Execução
 
-## 📦 Dependências necessárias
+Uso da API
 
-No arquivo **`pom.xml`**, certifique-se de adicionar:
+Expondo com Ngrok
 
-```xml
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-mail</artifactId>
-</dependency>
+Estrutura do Projeto
 
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
-</dependency>
+✨ Funcionalidades
+Envio de e-mails através do protocolo SMTP do Gmail
 
-⚙️ Configuração do application.properties
+API RESTful com endpoint único para envio de mensagens
 
-Configure o arquivo src/main/resources/application.properties:
+Integração simples com outras aplicações
 
-⚙️ Configuração do application.properties
+Possibilidade de exposição pública via ngrok
 
-Configure o arquivo src/main/resources/application.properties:
+Tratamento de erros e respostas padronizadas
 
+🚀 Tecnologias Utilizadas
+Java 17+
+
+Spring Boot
+
+Spring Mail (spring-boot-starter-mail)
+
+Spring Web (spring-boot-starter-web)
+
+Ngrok (para exposição pública)
+
+📋 Pré-requisitos
+Antes de executar a aplicação, certifique-se de ter instalado:
+
+JDK 17 ou superior
+
+Maven 3.6+
+
+Conta no Gmail
+
+Ngrok (opcional, para exposição pública)
+
+⚙️ Configuração
+1. Configuração do Gmail
+Por questões de segurança, não utilize sua senha real do Gmail. Em vez disso, gere uma Senha de App:
+
+Acesse Google Account Security
+
+Ative a verificação em duas etapas (se ainda não estiver ativada)
+
+Na seção "Como fazer login no Google", selecione "Senhas de app"
+
+Clique em "Selecionar app" → "E-mail" e "Selecionar dispositivo" → "Outro"
+
+Digite um nome para a aplicação (ex: "ApiApex") e clique em "Gerar"
+
+Copie a senha gerada (16 caracteres)
+
+2. Configuração da Aplicação
+Edite o arquivo src/main/resources/application.properties:
+
+properties
+# Configuração básica da aplicação
 spring.application.name=ApiApex
+server.port=8080
 
 # Configuração do servidor SMTP do Gmail
 spring.mail.host=smtp.gmail.com
 spring.mail.port=587
 spring.mail.username=SEU_EMAIL@gmail.com
-spring.mail.password=APP_PASSWORD_GMAIL
+spring.mail.password=SUA_SENHA_DE_APP_GERADA
 
-# Propriedades adicionais
+# Propriedades adicionais do SMTP
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+spring.mail.properties.mail.smtp.connectiontimeout=5000
+spring.mail.properties.mail.smtp.timeout=5000
+spring.mail.properties.mail.smtp.writetimeout=5000
+Substitua SEU_EMAIL@gmail.com pelo seu e-mail do Gmail e SUA_SENHA_DE_APP_GERADA pela senha de aplicativo que você gerou.
 
+🛠 Instalação e Execução
+Executando localmente
+Clone o repositório:
 
-🔑 Atenção:
-Não utilize a senha real da sua conta Google.
-É necessário gerar uma Senha de App no Painel de Segurança do Gmail
- → "Senhas de App".
-Copie e cole a senha gerada no campo spring.mail.password.
+bash
+git clone <url-do-repositorio>
+cd ApiApex
+Compile o projeto:
 
-📮 Endpoint de Envio de E-mail
+bash
+mvn clean compile
+Execute a aplicação:
 
-O controller expõe o endpoint:
-
-@PostMapping("/send")
-public ResponseEntity<String> sendEmail(@RequestBody Email email) {
-    try {
-        emailService.enviarEmail(email.getPara(), email.getAssunto(), email.getMensagem());
-        return ResponseEntity.ok("Email enviado com sucesso!");
-    } catch (Exception e) {
-        return ResponseEntity.status(500).body("Erro ao enviar email: " + e.getMessage());
-    }
-}
-
-Exemplo de requisição
-POST http://localhost:8080/emails/send
-Content-Type: application/json
-
-{
-  "para": "destinatario@gmail.com",
-  "assunto": "Teste API",
-  "mensagem": "Olá, este é um teste de envio de e-mail pela ApiApex!"
-}
-
-
-Se estiver utilizando ngrok, substitua a URL pelo link gerado, por exemplo:
-https://1234-5678.ngrok-free.app/emails/send
-
-Resposta esperada
-"Email enviado com sucesso!"
-
-🌍 Expor a API com Ngrok
-
-Instale o ngrok: Download
-
-Execute sua aplicação localmente:
-
+bash
 mvn spring-boot:run
+A aplicação estará disponível em http://localhost:8080.
 
+Executando com Ngrok
+Para expor sua API local publicamente:
 
-Abra um túnel ngrok para a porta do Spring Boot (geralmente 8080):
+Instale o Ngrok seguindo as instruções em ngrok.com/download
 
+Execute sua aplicação Spring Boot como descrito acima
+
+Em outro terminal, execute:
+
+bash
 ngrok http 8080
+O Ngrok fornecerá uma URL pública como:
 
-
-O ngrok irá fornecer uma URL pública, por exemplo:
-
+text
 Forwarding    https://1234-5678.ngrok-free.app -> http://localhost:8080
+Use esta URL para acessar sua API externamente
 
+📮 Uso da API
+Endpoint
+POST /emails/send
 
-Agora você pode acessar sua API externamente em:
+Corpo da Requisição
+Envie um JSON com a seguinte estrutura:
 
-https://1234-5678.ngrok-free.app/emails/send
+json
+{
+  "para": "destinatario@exemplo.com",
+  "assunto": "Assunto do E-mail",
+  "mensagem": "Conteúdo da mensagem em texto simples ou HTML"
+}
+Exemplo de Requisição
+bash
+curl -X POST \
+  http://localhost:8080/emails/send \
+  -H "Content-Type: application/json" \
+  -d '{
+    "para": "destinatario@gmail.com",
+    "assunto": "Teste API ApiApex",
+    "mensagem": "Olá, este é um teste de envio de e-mail pela ApiApex!"
+  }'
+Se estiver usando Ngrok, substitua a URL:
 
-✅ Resumo dos passos necessários
+bash
+curl -X POST \
+  https://1234-5678.ngrok-free.app/emails/send \
+  -H "Content-Type: application/json" \
+  -d '{
+    "para": "destinatario@gmail.com",
+    "assunto": "Teste API ApiApex",
+    "mensagem": "Olá, este é um teste de envio de e-mail pela ApiApex!"
+  }'
+Respostas da API
+Sucesso (200 OK):
 
-Adicionar as dependências (spring-boot-starter-mail e spring-boot-starter-web).
+json
+"Email enviado com sucesso!"
+Erro (500 Internal Server Error):
 
-Configurar o application.properties com e-mail e senha de app do Gmail.
-
-Subir a aplicação (mvn spring-boot:run).
-
-Usar o ngrok para expor o endpoint publicamente.
-
-Testar a API enviando uma requisição POST para /send.
+json
+"Erro ao enviar email: [mensagem de erro específica]"
+📁 Estrutura do Projeto
+text
+src/
+└── main/
+    ├── java/
+    │   └── com/
+    │       └── example/
+    │           └── apiapex/
+    │               ├── ApiApexApplication.java
+    │               ├── controller/
+    │               │   └── EmailController.java
+    │               ├── model/
+    │               │   └── Email.java
+    │               ├── service/
+    │               │   └── EmailService.java
+    │               └── config/
+    │                   └── MailConfig.java
+    └── resources/
+        └── application.properties
