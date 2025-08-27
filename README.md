@@ -83,3 +83,5 @@ spring.mail.properties.mail.smtp.starttls.required=true
 spring.mail.properties.mail.smtp.connectiontimeout=5000
 spring.mail.properties.mail.smtp.timeout=5000
 spring.mail.properties.mail.smtp.writetimeout=5000
+
+Substitua SEU_EMAIL@gmail.com pelo seu e-mail do Gmail e SUA_SENHA_DE_APP_GERADA pela senha de aplicativo gerada.
