@@ -5,7 +5,11 @@ import com.example.apiapex.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.mail.MessagingException;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,7 +55,7 @@ public class EmailController {
         return ResponseEntity.noContent().build();
     }
 
-    //Enviar email
+    // Enviar email simples (sem anexo)
     @PostMapping("/send")
     public ResponseEntity<String> sendEmail(@RequestBody Email email) {
         try {
@@ -59,6 +63,31 @@ public class EmailController {
             return ResponseEntity.ok("Email enviado com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Erro ao enviar email: " + e.getMessage());
+        }
+    }
+
+    // Enviar email com anexo
+    @PostMapping("/enviararquivo")
+    public ResponseEntity<String> sendEmailWithAttachment(
+            @RequestParam("para") String para,
+            @RequestParam("assunto") String assunto,
+            @RequestParam("mensagem") String mensagem,
+            @RequestParam("file") MultipartFile file) {
+
+        try {
+            // Salva o arquivo temporariamente no disco
+            File tempFile = File.createTempFile("upload-", file.getOriginalFilename());
+            file.transferTo(tempFile);
+
+            // Chama o service para enviar o e-mail com o anexo
+            emailService.enviarEmailComAnexo(para, assunto, mensagem, tempFile);
+
+            // Deleta o arquivo temporário depois do envio
+            tempFile.delete();
+
+            return ResponseEntity.ok("Email com anexo enviado com sucesso!");
+        } catch (MessagingException | IOException e) {
+            return ResponseEntity.status(500).body("Erro ao enviar email com anexo: " + e.getMessage());
         }
     }
 }
