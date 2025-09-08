@@ -1,13 +1,16 @@
 package com.example.apiapex.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.File;
 
 @Data
 @Entity
+@Getter
+@Setter
 public class Email {
 
     @Id
@@ -17,4 +20,7 @@ public class Email {
     private String para;
     private String assunto;
     private String mensagem;
+
+    private String fileName;
+    private String fileData;
 }
