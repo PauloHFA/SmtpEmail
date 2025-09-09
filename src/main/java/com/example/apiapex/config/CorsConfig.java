@@ -13,13 +13,9 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-
-                        .allowedOrigins("urldongrok", "http://localhost:3000")
-
+                        .allowedOrigins("url destino da aplicação", "http://localhost:3000")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-
                         .allowedHeaders("*")
-
                         .allowCredentials(true);
             }
         };

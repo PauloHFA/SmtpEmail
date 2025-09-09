@@ -72,7 +72,6 @@ public class EmailService {
         if (arquivo != null && arquivo.exists()) {
             helper.addAttachment(arquivo.getName(), arquivo);
         }
-
         mailSender.send(mimeMessage);
     }
 
